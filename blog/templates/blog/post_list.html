@@ -1,26 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Kikki the Smart Chicken</title>
-    </head>
-    <body>
-        <header>
-            <h1><a href="/">Kikki the Smart Chicken</a></h1>
+{% extends 'blog/base.html' %}
 
-        </header>
-        <main>
-            <article>
-                <time>published: 15.08.2023</time>
-                <h2><a href=" ">Kikki's 1st Blog Post</a></h2>
-                <p>Hi there! I'm Kikki!</p>
-            </article>
-
-            <article>
-                <time>published: 15.08.2023</time>
-                <h2><a href=" ">Kikki's 2nd Blog Post</a></h2>
-                <p>Hi again!</p>
-            </article>
-        </main>        
-        
-    </body>
-</html>
+{% block content %}
+    {% for post in posts %}
+        <article class="post">
+            <time class="date">
+                {{ post.published_date }}
+            </time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% endblock %}
